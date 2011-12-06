@@ -1,4 +1,5 @@
 
+set -e
 DIR="$(dirname "$(readlink -f "$0")")"
 cd "$DIR"
 
@@ -13,12 +14,13 @@ echo "Building Node ..."
 make
 
 echo
-echo "Installing into $DIR/root ..."
-mkdir "$DIR/root"
-make install DESTDIR="$DIR/root"
+echo "Installing into $DIR/install-root ..."
+mkdir -p "$DIR/install-root"
+make install DESTDIR="$DIR/install-root"
 
+cd $DIR
 echo
 echo "Building RPM ..."
-mkdir "$DIR/RPMS"
-rpmbuild -bb package.spec --buildroot "$DIR/root" --define "_topdir $DIR" --define "VERSION $VERSION"
+mkdir -p "$DIR/RPMS"
+rpmbuild -bb package.spec --buildroot "$DIR/install-root" --define "_topdir $DIR" --define "VERSION $VERSION"
 

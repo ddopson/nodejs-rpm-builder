@@ -1,0 +1,4 @@
+node-*
+*.rpm
+RPMS
+install-root
