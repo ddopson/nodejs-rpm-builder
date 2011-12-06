@@ -11,4 +11,6 @@ Requires: openssl, zlib, glibc
 Node.js is Google V8 JavaScript with an evented I/O based interface to POSIX.
 
 %files
-%defattr(-,root,root,-) /
+%defattr(-,root,root,-)
+/
+
